@@ -6,11 +6,10 @@ fn main() {
     let mut sum: usize = 0;
     let vec = vec![0; GOAL];
 
-    vec.iter().enumerate().for_each(|(index, _)|{
-        let mut number = index;
-        while number > 0 {
-            sum += number % 10;
-            number = number / 10;
+    vec.iter().enumerate().for_each(|(mut index, _)|{
+        while index > 0 {
+            sum += index % 10;
+            index = index / 10;
         }
     });
 
