@@ -1,43 +1,18 @@
-use std::io;
-
 fn main() {
+    const GOAL:usize = 1000000000000;
 
-    println!("This program sums digits of all natural numbers starting from 0 to y!");
+    println!("This program sums digits of all natural numbers starting from 0 to {GOAL}!");
 
-    let y: i64;
+    let mut sum: usize = 0;
+    let vec = vec![0; GOAL];
 
-    loop {
-
-        println!("Enter y (int)");
-        let mut y_input = String::new();
-        io::stdin()
-            .read_line(&mut y_input)
-            .expect("Failed to read input");
-
-        y = match y_input.trim().parse() {
-            Ok(num) => {
-                if num <= 0 {
-                    println!("y should be bigger than 0");
-                    continue;
-                }
-
-                num
-            },
-            Err(_) => {println!("Please enter a positive number!"); continue},
-        };
-
-        break;
-    }
-
-    let mut sum: i64 = 0;
-
-    for counter in 0..y {
-        let mut number = counter.clone();
+    vec.iter().enumerate().for_each(|(index, _)|{
+        let mut number = index;
         while number > 0 {
             sum += number % 10;
             number = number / 10;
         }
-    }
+    });
 
-    println!("Digit sum from 0 to {y} is {}", sum);
+    println!("Digit sum from 0 to {GOAL} is {}", sum);
 }
