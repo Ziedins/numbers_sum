@@ -2,27 +2,7 @@ use std::io;
 
 fn main() {
 
-    println!("This program sums digits of all natural numbers starting from x to y!");
-
-
-    let x: i64;
-
-    loop {
-
-        println!("Enter x (int)");
-        let mut x_input = String::new();
-        io::stdin()
-            .read_line(&mut x_input)
-            .expect("Failed to read input");
-
-        x = match x_input.trim().parse() {
-            Ok(num) => num,
-            Err(_) => {println!("Please enter positive number for side length!"); continue},
-        };
-
-        break;
-    }
-
+    println!("This program sums digits of all natural numbers starting from 0 to y!");
 
     let y: i64;
 
@@ -36,8 +16,8 @@ fn main() {
 
         y = match y_input.trim().parse() {
             Ok(num) => {
-                if num <= x {
-                    println!("y should be bigger than x");
+                if num <= 0 {
+                    println!("y should be bigger than 0");
                     continue;
                 }
 
@@ -49,15 +29,15 @@ fn main() {
         break;
     }
 
-    let mut counter: i64 = x.clone();
-    let mut sum: u32 = 0;
+    let mut sum: i64 = 0;
 
-    while counter <= y {
-        let number_string = counter.to_string();
-        sum += number_string.chars().map(|char| char.to_digit(10).unwrap()).sum::<u32>();
-
-        counter += 1;
+    for counter in 0..y {
+        let mut number = counter.clone();
+        while number > 0 {
+            sum += number % 10;
+            number = number / 10;
+        }
     }
 
-    println!("Digit sum from {x} to {y} is {}", sum);
+    println!("Digit sum from 0 to {y} is {}", sum);
 }
